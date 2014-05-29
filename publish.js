@@ -197,13 +197,15 @@ function attachModuleSymbols(doclets, modules) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
-    var nav = [];
+    var nav = [],
+        module_prefix_re = /^module:/;
 
-    if (members.namespaces.length) {
-        _.each(members.namespaces, function (v) {
+        if (members.modules.length) {
+        _.each(members.modules, function (v) {
             nav.push({
-                type: 'namespace',
+                type: 'module',
                 longname: v.longname,
+                title: v.longname.replace(module_prefix_re, ''),
                 name: v.name,
                 members: find({
                     kind: 'member',
@@ -229,6 +231,58 @@ function buildNav(members) {
         _.each(members.classes, function (v) {
             nav.push({
                 type: 'class',
+                longname: v.longname,
+                name: v.name,
+                members: find({
+                    kind: 'member',
+                    memberof: v.longname
+                }),
+                methods: find({
+                    kind: 'function',
+                    memberof: v.longname
+                }),
+                typedefs: find({
+                    kind: 'typedef',
+                    memberof: v.longname
+                }),
+                events: find({
+                    kind: 'event',
+                    memberof: v.longname
+                })
+            });
+        });
+    }
+
+    if (members.mixins.length) {
+        _.each(members.mixins, function (v) {
+            nav.push({
+                type: 'mixin',
+                longname: v.longname,
+                name: v.name,
+                members: find({
+                    kind: 'member',
+                    memberof: v.longname
+                }),
+                methods: find({
+                    kind: 'function',
+                    memberof: v.longname
+                }),
+                typedefs: find({
+                    kind: 'typedef',
+                    memberof: v.longname
+                }),
+                events: find({
+                    kind: 'event',
+                    memberof: v.longname
+                })
+            });
+        });
+    }
+
+    if (members.namespaces.length) {
+        _.each(members.namespaces, function (v) {
+            nav.push({
+                type: 'namespace',
                 longname: v.longname,
                 name: v.name,
                 members: find({
