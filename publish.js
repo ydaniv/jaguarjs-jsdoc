@@ -197,16 +197,55 @@ function attachModuleSymbols(doclets, modules) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
-    var nav = [],
-        module_prefix_re = /^module:/;
+    var nav = {
+            __no_category__: []
+        },
+        module_prefix_re = /^module:/,
+        tagsExtractor = function (titles, tags) {
+            var res = {};
+            if ( tags ) {
+                tags.forEach(function (tag) {
+                    if ( ~ titles.indexOf(tag.title) ) {
+                        res[tag.title] = tag.value;
+                    }
+                });
+            }
+            return res;
+        },
+        categoryExtractor = tagsExtractor.bind(null, ['category', 'sub-category']),
+        addToNav = function (mod) {
+            var category, subcategory;
+            if ( category = mod.category ) {
+                if ( ! nav[category] ) {
+                    nav[category] = {
+                        __no_category__: []
+                    };
+                }
+                if ( subcategory = mod['sub-category'] ) {
+                    if ( ! nav[category][subcategory] ) {
+                        nav[category][subcategory] = [];
+                    }
+                    nav[category][subcategory].push(mod);
+                }
+                else {
+                    nav[category].__no_category__.push(mod);
+                }
+            }
+            else {
+                nav.__no_category__.push(mod);
+            }
+        };
 
-        if (members.modules.length) {
+    if (members.modules.length) {
         _.each(members.modules, function (v) {
-            nav.push({
+            var cats = categoryExtractor(v.tags);
+            addToNav({
                 type: 'module',
                 longname: v.longname,
                 title: v.longname.replace(module_prefix_re, ''),
                 name: v.name,
+                category: cats.category,
+                'sub-category': cats['sub-category'],
                 members: find({
                     kind: 'member',
                     memberof: v.longname
@@ -229,10 +268,14 @@ function buildNav(members) {
 
     if (members.classes.length) {
         _.each(members.classes, function (v) {
-            nav.push({
+            var cats = categoryExtractor(v.tags);
+            addToNav({
                 type: 'class',
                 longname: v.longname,
+                title: v.longname.replace(module_prefix_re, ''),
                 name: v.name,
+                category: cats.category,
+                'sub-category': cats['sub-category'],
                 members: find({
                     kind: 'member',
                     memberof: v.longname
@@ -255,10 +298,14 @@ function buildNav(members) {
 
     if (members.mixins.length) {
         _.each(members.mixins, function (v) {
-            nav.push({
+            var cats = categoryExtractor(v.tags);
+            addToNav({
                 type: 'mixin',
                 longname: v.longname,
+                title: v.longname.replace(module_prefix_re, ''),
                 name: v.name,
+                category: cats.category,
+                'sub-category': cats['sub-category'],
                 members: find({
                     kind: 'member',
                     memberof: v.longname
@@ -281,10 +328,14 @@ function buildNav(members) {
 
     if (members.namespaces.length) {
         _.each(members.namespaces, function (v) {
-            nav.push({
+            var cats = categoryExtractor(v.tags);
+            addToNav({
                 type: 'namespace',
                 longname: v.longname,
+                title: v.longname.replace(module_prefix_re, ''),
                 name: v.name,
+                category: cats.category,
+                'sub-category': cats['sub-category'],
                 members: find({
                     kind: 'member',
                     memberof: v.longname
