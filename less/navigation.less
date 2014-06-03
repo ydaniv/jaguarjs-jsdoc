@@ -40,7 +40,7 @@
     }
 
     .list {
-        padding: 10px 15px 0 15px;
+        padding: 10px 5px 0;
         position: relative;
         overflow: auto;
         width: 100%;
@@ -67,7 +67,7 @@
                 }
             }
             display: block;
-            font-size: 0.8em;
+//            font-size: 0.8em;
 
             .static {
                 display: block;
@@ -87,10 +87,16 @@
             display: block;
         }
 
+        .category {
+            color: #bada55;
+        }
+        .subcategory{
+            color: #a55bad;
+        }
 
         ul {
             & > li {
-                font-size: 0.7em;
+//                font-size: 0.7em;
                 padding-left: 8px;
                 margin-top: 2px;
             }
@@ -98,6 +104,9 @@
 
         .itemMembers {
             display: none;
+            li {
+                font-size: 0.7em;
+            }
         }
     }
 }

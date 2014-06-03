@@ -11,25 +11,33 @@ var self = this;
     <?js
     Object.keys(this.nav).forEach(function (category) {
         var items = self.nav[category];
-    ?>
+        if ( category.indexOf('__') ) { ?>
         <li class="item item-category" data-name="<?js= category ?>">
-            <?js if ( category.indexOf('__') ) { ?><span class="category"><?js= category ?>s</span><?js } ?>
+            <span class="category"><?js= category ?>s</span>
             <ul>
                 <?js if ( Array.isArray(items) ) { ?>
                     <?js= self.partial('navitem.tmpl', items) ?>
                 <?js } else { ?>
-                    <?js Object.keys(items).forEach(function (subcategory) {
-                        var sub_items = items[subcategory]; ?>
+                    <?js
+                    Object.keys(items).forEach(function (subcategory) {
+                        var sub_items = items[subcategory];
+                        if ( subcategory.indexOf('__') ) { ?>
                         <li class="item item-subcategory" data-name="<?js= subcategory ?>">
-                            <?js if ( subcategory.indexOf('__') ) { ?><span class="subcategory"><?js= subcategory ?></span><?js } ?>
+                            <span class="subcategory"><?js= subcategory ?></span>
                             <ul>
                                 <?js= self.partial('navitem.tmpl', sub_items) ?>
                             </ul>
                         </li>
-                    <?js }); ?>
+                        <?js } else { ?>
+                            <?js= self.partial('navitem.tmpl', sub_items) ?>
+                        <?js }
+                    }); ?>
                 <?js } ?>
             </ul>
         </li>
-    <?js }); ?>
+    <?js } else { ?>
+            <?js= self.partial('navitem.tmpl', items) ?>
+        <?js }
+    }); ?>
     </ul>
 </div>

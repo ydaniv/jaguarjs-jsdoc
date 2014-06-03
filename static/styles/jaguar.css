@@ -48,7 +48,7 @@ li {
   border-color: #555;
 }
 .navigation .list {
-  padding: 10px 15px 0 15px;
+  padding: 10px 5px 0;
   position: relative;
   overflow: auto;
   width: 100%;
@@ -68,7 +68,6 @@ li {
   cursor: pointer;
   position: relative;
   display: block;
-  font-size: 0.8em;
 }
 .navigation li.item .title a {
   color: #e1e1e1;
@@ -91,13 +90,21 @@ li {
   color: #779c34;
   display: block;
 }
+.navigation li.item .category {
+  color: #bada55;
+}
+.navigation li.item .subcategory {
+  color: #a55bad;
+}
 .navigation li.item ul > li {
-  font-size: 0.7em;
   padding-left: 8px;
   margin-top: 2px;
 }
 .navigation li.item .itemMembers {
   display: none;
+}
+.navigation li.item .itemMembers li {
+  font-size: 0.7em;
 }
 .main {
   padding: 20px 20px;
@@ -139,12 +146,6 @@ li {
   color: #fff;
   font-size: 0.7em;
   padding: 2px 4px;
-}
-.main h4.name span.type-signature.type a {
-  color: #fff;
-}
-.main h4.name > span.type-signature:first-child {
-  margin-right: 8px;
 }
 .main h4.name span.type {
   margin-left: 5px;
