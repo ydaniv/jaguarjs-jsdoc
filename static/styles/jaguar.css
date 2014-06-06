@@ -200,6 +200,12 @@ li {
 .main .tag-source {
   font-size: 12px;
 }
+.main dt.inherited + dd {
+  display: none;
+}
+.main dt.inherited.expanded + dd {
+  display: block;
+}
 .main dt.tag-source {
   margin-top: 5px;
 }
