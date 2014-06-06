@@ -108,9 +108,13 @@ function getPathFromDoclet(doclet) {
         return;
     }
 
-    var filepath = doclet.meta.path && doclet.meta.path !== 'null' ?
-        doclet.meta.path + '/' + doclet.meta.filename :
-        doclet.meta.filename;
+    var filepath;
+    if ( doclet.meta.path && doclet.meta.path !== 'null' ) {
+        filepath = doclet.meta.path + '/' + doclet.meta.filename.split('/').pop();
+    }
+    else {
+        filepath = doclet.meta.filename;
+    }
 
     return filepath;
 }
