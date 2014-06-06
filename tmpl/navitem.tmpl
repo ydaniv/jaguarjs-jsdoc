@@ -43,9 +43,11 @@
         <?js
 
             item.methods.forEach(function (v) {
+                if (! v.inherited) {
         ?>
             <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
         <?js
+                }
             });
         }
         ?>
