@@ -42,6 +42,11 @@ $(function () {
                 .show();
     }
 
+    // toggle inherited members
+    $('dt.inherited').on('click', function () {
+        this.classList.toggle('expanded');
+    });
+
     // Auto resizing on navigation
     var _onResize = function () {
         var height = $(window).height();
