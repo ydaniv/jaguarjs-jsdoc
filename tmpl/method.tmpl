@@ -2,7 +2,7 @@
 var data = obj;
 var self = this;
 ?>
-<dt>
+<dt class="<?js if (data.inherited) { ?>inherited<?js } ?>">
     <div class="nameContainer<?js if (data.inherited) { ?> inherited<?js } ?>">
         <h4 class="name" id="<?js= id ?>">
             <?js if (data.inherited || data.inherits) { ?>
