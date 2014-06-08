@@ -22,12 +22,22 @@ li {
   background-color: gray;
   border-radius: 4px;
 }
+.expand-inner .navigation .inner {
+  display: block;
+}
+.expand-private .navigation .private {
+  display: block;
+}
 .navigation {
   position: fixed;
   float: left;
   width: 250px;
   height: 100%;
   background-color: #1a1a1a;
+}
+.navigation .private,
+.navigation .inner {
+  display: none;
 }
 .navigation .applicationName {
   margin: 0;
@@ -112,6 +122,11 @@ li {
 }
 .main .page-title {
   display: none;
+}
+.main .scope-visibility-controls {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 .main h1 {
   font-weight: bold;
@@ -205,6 +220,12 @@ li {
 }
 .main dt.inherited.expanded + dd {
   display: block;
+}
+.main dt.private,
+.main dt.inner,
+.main dt.private + dd,
+.main dt.inner + dd {
+  display: none;
 }
 .main dt.tag-source {
   margin-top: 5px;
@@ -339,6 +360,14 @@ li {
 .main article ul > li {
   margin-bottom: 5px;
   list-style-type: disc;
+}
+.expand-private dt.private,
+.expand-private dt.private + dd {
+  display: block;
+}
+.expand-inner dt.inner,
+.expand-inner dt.inner + dd {
+  display: block;
 }
 footer {
   margin: 15px 0;

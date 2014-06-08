@@ -7,6 +7,12 @@
         display: none;
     }
 
+    .scope-visibility-controls {
+        position: absolute;
+        right : 0;
+        top : 0;
+    }
+
     h1 {
         font-weight: bold;
         font-size: 1.6em;
@@ -124,6 +130,10 @@
 
     dt.inherited.expanded + dd {
         display: block;
+    }
+
+    dt.private, dt.inner, dt.private + dd, dt.inner + dd {
+        display: none;
     }
 
     dt.tag-source {
@@ -288,5 +298,17 @@
             margin-bottom: 5px;
             list-style-type: disc;
         }
+    }
+}
+
+.expand-private {
+    dt.private, dt.private + dd {
+        display: block;
+    }
+}
+
+.expand-inner {
+    dt.inner, dt.inner + dd {
+        display: block;
     }
 }

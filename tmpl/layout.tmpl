@@ -51,6 +51,11 @@
 <div id="wrap" class="clearfix">
     <?js= this.partial('navigation.tmpl', this) ?>
     <div class="main">
+        <div class="scope-visibility-controls">
+            <span>Show:</span>
+            <label>Private: <input type="checkbox" name="private"/></label>
+            <label>Inner: <input type="checkbox" name="inner"/></label>
+        </div>
         <h1 class="page-title" data-longname="<?js= longname ?>" data-filename="<?js= filename ?>"><?js= title ?></h1>
         <?js= content ?>
 

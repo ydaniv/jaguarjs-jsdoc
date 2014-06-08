@@ -47,6 +47,26 @@ $(function () {
         this.classList.toggle('expanded');
     });
 
+    var $scope_vis_cntrls = $('.scope-visibility-controls');
+
+    // toggle private members
+    $scope_vis_cntrls.find('[name="private"]')
+        .on('change', function () {
+            this.checked ?
+                document.body.classList.add('expand-private') :
+                document.body.classList.remove('expand-private');
+        })
+        .trigger('change');
+
+    // toggle inner members
+    $scope_vis_cntrls.find('[name="inner"]')
+        .on('change', function () {
+            this.checked ?
+                document.body.classList.add('expand-inner') :
+                document.body.classList.remove('expand-inner');
+        })
+        .trigger('change');
+
     // Auto resizing on navigation
     var _onResize = function () {
         var height = $(window).height();
