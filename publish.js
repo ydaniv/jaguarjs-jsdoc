@@ -83,6 +83,7 @@ function addAttribs(f) {
     var attribs = helper.getAttribs(f);
 
     if (attribs.length) {
+        f.attrs = attribs;
         f.attribs = '<span class="type-signature ' + (attribs[0] === 'static' ? 'static' : '') + '">' + htmlsafe(attribs.length ? attribs.join(',') : '') + '</span>';
     }    
 }
